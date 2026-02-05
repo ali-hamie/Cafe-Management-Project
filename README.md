@@ -28,7 +28,7 @@ The system allows for different types of users to interact with a cafe catalog, 
 
 Backened: Java Spring
 
-Frontend: Angular
+Frontend: Angular 
 
 Database: Relational Database
 
