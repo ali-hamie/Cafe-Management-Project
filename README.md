@@ -68,7 +68,7 @@ US-006: User Login and Session (Optional)
 
 US-009: Order Search and Filter
 
-# Work Distribution
+# Work Distribution (Assignmnet 2)
 
 Each team member contributed to both backend and frontend tasks as required:
 
