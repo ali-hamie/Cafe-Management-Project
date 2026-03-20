@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pricing Packages</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f0eb;
+            padding: 30px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #5c3d2e;
+        }
+
+        .plans-container {
+            text-align: center;
+        }
+
+        .card {
+            display: inline-block; /* allows cards to sit next to each other instead of stacking vertically */
+            margin: 10px;
+        }
+
+        .recommended {
+            border-color: #e67e22;
+            background-color: #fff8f2;
+        }
+
+        .badge {
+            background-color: #e67e22;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+        }
+
+        .price {
+            font-size: 24px;
+            font-weight: bold;
+            color: #e67e22;
+            margin: 10px 0;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        details {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Our Pricing Packages</h1>
+<p>Choose the specific plan that works best for your cafe.</p>
+
+<div class="plans-container">
+    {{#plans}}
+        <div class="card {{#recommended}}recommended{{/recommended}}">
+
+            {{#recommended}}
+                <span class="badge">Recommended</span>
+            {{/recommended}}
+
+            <h2>{{name}}</h2>
+            <p>{{description}}</p>
+            <div class="price">AED {{price}} / month</div>
+
+            <ul>
+                {{#features}}
+                    <li>{{.}}</li>
+                {{/features}}
+            </ul>
+
+            <details>
+                <summary>Learn More</summary>
+                <p>This package is designed to support cafés based on their size, order volume, and operational needs.</p>
+            </details>
+
+        </div>
+    {{/plans}}
+</div>
+
+</body>
+</html>
