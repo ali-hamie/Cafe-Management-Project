@@ -1,50 +1,99 @@
 <!DOCTYPE html>
-<html lang = "en">
+
+<html lang="en">
+
 <head>
-    <title>Orders</title>
+
+<title>Orders</title>
+
 </head>
+
 <body>
 
 <h1>Orders</h1>
 
+<form action="/orders" method="get">
+
+<input type="text" name="search" placeholder="Search by Order ID">
+
+<select name="status">
+<option value=""> Filtering Type </option>
+<option value="pending">Pending</option>
+<option value="delivered">Delivered</option>
+</select>
+
+<label>From:</label>
+<input type="Date" name="From">
+
+<label>To:</label>
+<input type="Date" name="To">
+
+<button type="submit">Search</button>
+<a href="/orders">Clear</a>
+
+</form>
+
+<p>Showing {{resultCount}} orders</p>
+
 {{#hasOrders}}
 
-    <h2>Active Orders</h2>
+<h2>Active Orders</h2>
+{{#activeOrders}}
 
-    {{#activeOrders}}
-        <p>
-            Order ID: {{orderId}} <br>
-            Order Status: {{status}} <br>
-            Message: {{orderMessage}}
-        </p>
-        <hr>
-    {{/activeOrders}}
+<p>
 
-    <h2>Completed Orders</h2>
-    {{#completedOrders}}
-        <p>
-            Order ID: {{orderId}} <br>
-            Order Status: {{status}}
-        </p>
-        <hr>
-    {{/completedOrders}}
+Order ID: {{orderId}} <br>
+Order Status: {{status}} <br>
+Message: {{orderMessage}}
+
+</p>
+
+<hr>
+{{/activeOrders}}
+
+<h2>Completed Orders</h2>
+{{#completedOrders}}
+
+<p>
+
+Order ID: {{orderId}} <br>
+Order Status: {{status}}
+
+</p>
+
+<hr>
+{{/completedOrders}}
 
 {{/hasOrders}}
+
+{{#noOrders}}
+
 <p>
-    Order ID: {{orderId}} <br>
-    Items: {{items}} <br>
-    Total Price: {{totalPrice}} <br>
-    Status: {{status}}
+
+No orders found matching your search.
+
 </p>
+
+{{/noOrders}}
+
+<p>
+
+Order ID: {{orderId}} <br>
+Items: {{items}} <br>
+Total Price: {{totalPrice}} <br>
+Status: {{status}}
+
+</p>
+
 <form action="/saveorder" method="post">
 
-    <label>Items</label>
-    <input type="text" name="items">
+<label>Items</label>
+<input type="text" name="items">
 
-    <label>Total Price</label>
-    <input type="number" name="totalPrice">
+<label>Total Price</label>
+<input type="number" name="totalPrice">
 
-    <button type="submit">Create Order</button>
+<button type="submit">Create Order</button>
 
 </form>
 
