@@ -73,8 +73,7 @@ US-009: Order Search and Filter
 Each team member contributed to both backend and frontend tasks as required:
 
 Meera:
-
-US-002 (Backend support – order listing)
+US-001 (Order Creation – Backend & Frontend)
 
 Syed:
 
@@ -83,7 +82,7 @@ US-009 (Search & Filter – Backend)
 
 Mouza:
 
-US-001 (Order Creation – Backend & Frontend)
+US-002 (Backend support – order listing)
 
 Francois:
 
