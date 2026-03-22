@@ -21,6 +21,9 @@ public class Order {
         this.createdAt = LocalDate.now();
     }
 
+    public void setId(String orderId) {
+        this.orderId = orderId;
+    }
     public String getItems(){
         return items;
     }
