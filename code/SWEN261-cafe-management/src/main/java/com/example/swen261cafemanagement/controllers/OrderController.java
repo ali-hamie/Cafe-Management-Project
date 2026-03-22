@@ -68,11 +68,15 @@ public class OrderController {
     }
     @PostMapping("/saveorder")
     public String saveOrder(Order order) {
+
+        if (order.getItems() == null || order.getItems().isEmpty()) {
+            return "redirect:/orders";
+        }
         order.setOrderId(String.valueOf(System.currentTimeMillis()));
         order.setStatus("pending");
-        order.setItems(order.getItems());
-        order.setTotalPrice(order.getTotalPrice());
+
         orderService.createOrder(order);
+
         return "redirect:/orders";
     }
 }
