@@ -45,8 +45,8 @@ public class OrderController {
             orders = orderService.getAllOrders();
         }
 
-        List<Order> active = new ArrayList<>();
-        List<Order> completed = new ArrayList<>();
+        List<Order> active = orderService.getActiveOrders(orders);
+        List<Order> completed = orderService.getCompletedOrders(orders);
 
         for (int i = 0; i < orders.size(); i++) {
             Order o = orders.get(i);
