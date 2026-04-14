@@ -57,4 +57,19 @@ public class OrderController {
 
         return "redirect:/orders";
     }
+    @PostMapping("/updatestatus")
+    public String updateStatus(
+        @RequestParam String orderId,
+        @RequestParam String status,
+        Model model) 
+    {
+
+    boolean success = orderService.updateOrderStatus(orderId, status);
+
+    if (!success) {
+        model.addAttribute("errorMsg", "Invalid status update");
+    }
+
+    return "redirect:/orders";
+}
 }
