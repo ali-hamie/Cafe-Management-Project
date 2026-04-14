@@ -16,6 +16,30 @@ public class OrderService {
         return orders;
     }
 
+    public ArrayList<Order> getActiveOrders(List<Order> orders) {
+    ArrayList<Order> active = new ArrayList<>();
+
+    for (int i = 0; i < orders.size(); i++) {
+        if (!orders.get(i).isCompleted()) {
+            active.add(orders.get(i));
+        }
+    }
+
+    return active;
+}
+
+    public ArrayList<Order> getCompletedOrders(List<Order> orders) {
+    ArrayList<Order> completed = new ArrayList<>();
+
+    for (int i = 0; i < orders.size(); i++) {
+        if (orders.get(i).isCompleted()) {
+            completed.add(orders.get(i));
+        }
+    }
+
+    return completed;
+}
+    
     public ArrayList<Order> searchByOrderId(String orderId) {
         ArrayList<Order> result = new ArrayList<>();
         for (int i = 0; i < orders.size(); i++) {
