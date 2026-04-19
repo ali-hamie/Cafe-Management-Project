@@ -93,3 +93,17 @@ public class OrderController {
         return "redirect:/orders";
     }
 }
+
+@PostMapping("/orders/{id}/delete")
+public String cancelOrder(@PathVariable("id") String id, Model model) {
+
+    boolean success = orderService.cancelOrder(id);
+
+    if (success) {
+        model.addAttribute("successMsg", "Order cancelled successfully");
+    } else {
+        model.addAttribute("errorMsg", "Order cannot be cancelled");
+    }
+
+    return orders(model, null, null, null, null);
+}
