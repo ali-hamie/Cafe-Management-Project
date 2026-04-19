@@ -5,8 +5,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class MainController {
+
     @RequestMapping("/Welcome")
-    public String getWelcome(){
+    public String getWelcome() {
         return "Welcome.html";
+    }
+
+    @RequestMapping("/dashboard")
+    public String getDashboard() {
+        return "dashboard";
     }
 }
