@@ -1,27 +1,26 @@
 package com.example.swen261cafemanagement.models;
 
 public class Items {
-    private Long id;
     private String name;
-    private double price;
     private int quantity;
+    private int threshold;
 
-    public Items() {}
-
-    public Items(Long id, String name, double price, int quantity) {
-        this.id = id;
+    public Items(String name, int quantity, int threshold) {
         this.name = name;
-        this.price = price;
         this.quantity = quantity;
+        this.threshold = threshold;
     }
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    public void setQuantity(int quantity) { this.quantity = quantity; }
+    public void setThreshold(int threshold) { this.threshold = threshold; }
+    public String getName()
+    { return name; }
+    public int getQuantity()
+    { return quantity; }
+    public int getThreshold() {
+        return threshold; }
 
     public boolean isLowStock() {
-        return this.quantity < 0;
+        return quantity <= threshold;
     }
 }
