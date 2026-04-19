@@ -93,5 +93,24 @@ No orders found matching your search.
 
 </form>
 
+<h2>Low Stock Alerts</h2>
+
+{{#hasLowStock}}
+<p> Low Stock Items ({{lowStockCount}})</p>
+
+{{#lowStockItems}}
+<p>
+Item: {{name}} <br>
+Quantity: {{quantity}} <br>
+Threshold: {{threshold}}
+</p>
+<hr>
+{{/lowStockItems}}
+{{/hasLowStock}}
+
+{{#noLowStock}}
+<p style="color:green;">All stock levels are healthy</p>
+{{/noLowStock}}
+
 </body>
 </html>
