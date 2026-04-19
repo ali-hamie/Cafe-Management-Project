@@ -1,42 +1,69 @@
 package com.example.swen261cafemanagement.controllers;
 
-import com.example.swen261cafemanagement.models.Item;
-import com.example.swen261cafemanagement.service.ItemService;
+import com.example.swen261cafemanagement.models.Order;
+import com.example.swen261cafemanagement.service.OrderService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
-@RequestMapping("/items")
-public class ItemController {
+public class OrderController {
 
-    private final ItemService service;
+    private final OrderService orderService;
 
-    public ItemController(ItemService service) {
-        this.service = service;
+    public OrderController(OrderService orderService) {
+        this.orderService = orderService;
     }
 
-    // VIEW PAGE
-    @GetMapping
-    public String viewItems(Model model) {
-        model.addAttribute("items", service.getAllItems());
-        return "items";
+    @RequestMapping("/orders")
+    public String orders(Model model,
+                         @RequestParam(required = false) String search,
+                         @RequestParam(required = false) String status,
+                         @RequestParam(required = false) String from,
+                         @RequestParam(required = false) String to) {
+
+        List<Order> orders = orderService.getFilteredOrders(search, status, from, to);
+        List<Order> active = orderService.getActiveOrders(orders);
+        List<Order> completed = orderService.getCompletedOrders(orders);
+
+        model.addAttribute("activeOrders", active);
+        model.addAttribute("completedOrders", completed);
+
+        model.addAttribute("hasOrders", !orders.isEmpty());
+        model.addAttribute("noOrders", orders.isEmpty());
+        model.addAttribute("resultCount", orders.size());
+
+        return "orders";
     }
 
-    // ADD ITEM
-    @PostMapping("/add")
-    public String addItem(@RequestParam String name,
-                          @RequestParam double price,
-                          @RequestParam int quantity) {
+    @PostMapping("/saveorder")
+    public String saveOrder(Order order) {
 
-        service.addItem(new Item(null, name, price, quantity));
-        return "redirect:/items";
+        if (order.getItems() == null || order.getItems().isEmpty()) {
+            return "redirect:/orders";
+        }
+        order.setOrderId(String.valueOf(System.currentTimeMillis()));
+        order.setStatus("pending");
+
+        orderService.createOrder(order);
+
+        return "redirect:/orders";
+    }
+    @PostMapping("/updatestatus")
+    public String updateStatus(
+        @RequestParam String orderId,
+        @RequestParam String status,
+        Model model) 
+    {
+
+    boolean success = orderService.updateOrderStatus(orderId, status);
+
+    if (!success) {
+        model.addAttribute("errorMsg", "Invalid status update");
     }
 
-    // DELETE
-    @GetMapping("/delete/{id}")
-    public String deleteItem(@PathVariable Long id) {
-        service.deleteItem(id);
-        return "redirect:/items";
-    }
+    return "redirect:/orders";
+}
 }
