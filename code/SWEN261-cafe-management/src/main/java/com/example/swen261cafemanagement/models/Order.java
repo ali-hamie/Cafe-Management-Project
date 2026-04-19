@@ -13,7 +13,7 @@ public class Order {
 
     public Order() {}
 
-    public Order(String orderId, String status, String orderMessage, String items, String status, double totalPrice) {
+    public Order(String orderId, String orderMessage, String items, String status, double totalPrice) {
         this.orderId = orderId;
         this.orderMessage = orderMessage;
         this.items = items;
