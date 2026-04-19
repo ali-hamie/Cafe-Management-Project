@@ -26,11 +26,11 @@ The system allows for different types of users to interact with a cafe catalog, 
 
 # Technology Stack
 
-Backened: Java Spring
+Backend: Java Spring Boot
 
-Frontend: Angular 
+Frontend: Mustache (HTML templates)
 
-Database: Relational Database
+Database: None (ArrayList in-memory storage)
 
 Project Management: Scrum with [Trello](https://trello.com/invite/b/696f297c36e70018d3f233b2/ATTI19dfb0717a7b2a0b1992adfc04f799e111786B2D/swen-261-cafe-management)
 
@@ -44,3 +44,65 @@ These can be found either through their links or through the Documentation Folde
 
   [UML](https://lucid.app/lucidchart/55085f5a-c088-4a4d-9449-aad70fc40195/edit?invitationId=inv_d6bde052-db9e-4956-a122-efc43a3172a9)
 
+# Sprint Plan (10 Days)
+
+Days 1–2: Setup + task breakdown
+
+Days 3–5: Backend development
+
+Days 6–8: Frontend development
+
+Days 9–10: Testing + integration + documentation
+
+# Implemented User Stories (Assignment 2)
+
+For Assignment 2, the following user stories were selected and distributed among the team:
+
+US-001: Creation of Order
+
+US-002: Viewing Orders
+
+US-004: Viewing Pricing Packages
+
+US-006: User Login and Session (Optional)
+
+US-009: Order Search and Filter
+
+# Work Distribution (Assignmnet 2)
+
+Each team member contributed to both backend and frontend tasks as required:
+
+Meera:
+US-001 (Creation of Order) – Implemented backend (Order model, service, POST endpoint) and frontend (order creation form and integration)
+
+Syed:
+US-009 (Order Search and Filter) – Implemented backend (search and filter methods, endpoints) and frontend (search and filter interface)
+
+Mouza:
+US-002 (Viewing Orders) – Implemented backend (order retrieval logic) and frontend (display of active and completed orders)
+
+Francois:
+US-006 (User Login and Session – Optional) – Implemented backend (login logic) and frontend (login interface), and assisted in testing
+
+Ali:
+US-004 (Viewing Pricing Packages) – Implemented backend (pricing model and service) and frontend (pricing display page)
+
+# Implementation Details
+
+Data is stored using ArrayList (in-memory storage) as required by the assignment
+
+No database is used & data resets when the application restarts
+
+Backend is implemented using Spring Boot with REST endpoints
+
+Frontend is implemented using Mustache templates
+
+Full integration between frontend and backend is achieved
+
+# Key Features
+
+- Create and store new orders using a form
+- Display active and completed orders
+- Search and filter orders
+- View pricing packages
+- Basic login functionality (optional)

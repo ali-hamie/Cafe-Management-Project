@@ -1,38 +1,116 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
-    <title>Orders</title>
+
+<title>Orders</title>
+
 </head>
+
 <body>
 
 <h1>Orders</h1>
+{{#errorMsg}}
+<p style="color:red;">{{errorMsg}}</p>
+{{/errorMsg}}
+
+<form action="/orders" method="get">
+
+<input type="text" name="search" placeholder="Search by Order ID">
+
+<select name="status">
+<option value=""> Filtering Type </option>
+<option value="pending">Pending</option>
+<option value="delivered">Delivered</option>
+</select>
+
+<label>From:</label>
+<input type="Date" name="From">
+
+<label>To:</label>
+<input type="Date" name="To">
+
+<button type="submit">Search</button>
+<a href="/orders">Clear</a>
+
+</form>
+
+<p>Showing {{resultCount}} orders</p>
 
 {{#hasOrders}}
 
-    <h2>Active Orders</h2>
+<h2>Active Orders</h2>
+{{#activeOrders}}
 
-    {{#activeOrders}}
-        <p>
-            Order ID: {{orderId}} <br>
-            Order Status: {{orderStatus}} <br>
-            Message: {{ordermessage}}
 
-        </p>
-        <hr>
-    {{/activeOrders}}
+<p>
+Order ID: {{orderId}} <br>
+Order Status: {{status}} <br>
+</p>
 
-    <h2>Completed Orders</h2>
-    {{#completedOrders}}
-        <p>
-            Order ID: {{orderId}} <br>
-            Order Status: {{orderStatus}}<br>
-            Message: {{ordermessage}}
 
-        </p>
-        <hr>
-    {{/completedOrders}}
+<hr>
+{{/activeOrders}}
+
+<h2>Completed Orders</h2>
+{{#completedOrders}}
+<p>
+<strong>Order completed successfully</strong><br>
+
+Order ID: {{orderId}} <br>
+Order Status: {{status}}
+
+</p>
+
+<hr>
+{{/completedOrders}}
 
 {{/hasOrders}}
+
+{{#noOrders}}
+
+<p>
+
+No orders found matching your search.
+
+</p>
+
+{{/noOrders}}
+
+
+<form action="/saveorder" method="post">
+
+<label>Items</label>
+<input type="text" name="items">
+
+<label>Total Price</label>
+    <input type="number" name="totalPrice" step="0.01" required>
+    <label>Message</label>
+    <input type="text" name="orderMessage">
+
+<button type="submit">Create Order</button>
+
+</form>
+
+<h2>Low Stock Alerts</h2>
+
+{{#hasLowStock}}
+<p> Low Stock Items ({{lowStockCount}})</p>
+
+{{#lowStockItems}}
+<p>
+Item: {{name}} <br>
+Quantity: {{quantity}} <br>
+Threshold: {{threshold}}
+</p>
+<hr>
+{{/lowStockItems}}
+{{/hasLowStock}}
+
+{{#noLowStock}}
+<p style="color:green;">All stock levels are healthy</p>
+{{/noLowStock}}
 
 </body>
 </html>

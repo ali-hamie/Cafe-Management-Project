@@ -4,9 +4,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class MainController {
-    @RequestMapping("/Welcome")
-    public String getWelcome(){
-        return "Welcome.html";
+public class LogoutController {
+
+    @RequestMapping("/logout")
+    public String getLogout() {
+        return "logout.html";
     }
+
+
 }
