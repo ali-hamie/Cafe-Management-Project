@@ -11,9 +11,9 @@ public class InventoryService {
     private ArrayList<Items> items = new ArrayList<>();
 
     public InventoryService() {
-        items.add(new Items(1234L,"Milk", 2, 5));
-        items.add(new Items(3452L,"Coffee Beans", 10, 5));
-        items.add(new Items(3059L,"Sugar", 1, 3));
+        items.add(new Items("Milk", 2, 5));
+        items.add(new Items("Coffee Beans", 10, 5));
+        items.add(new Items("Sugar", 1, 3));
     }
 
     public ArrayList<Items> getAllItems() {
@@ -30,5 +30,16 @@ public class InventoryService {
         }
 
         return low;
+    }
+
+    public void addOrUpdateItem(String name, int quantity, int threshold) {
+        for (Items item : items) {
+            if (item.getName().equalsIgnoreCase(name)) {
+                item.setQuantity(quantity);
+                item.setThreshold(threshold);
+                return;
+            }
+        }
+        items.add(new Items(name, quantity, threshold));
     }
 }
