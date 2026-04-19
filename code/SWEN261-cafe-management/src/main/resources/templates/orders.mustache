@@ -1,116 +1,418 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
+    <title>Orders — Cafe Management</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #faf6f1;
+            --espresso: #2c1a0e;
+            --coffee: #6b3f1f;
+            --latte: #c9a882;
+            --foam: #f0e6d8;
+            --steam: #e8ddd0;
+            --red: #c0392b;
+            --green: #2d6a4f;
+            --gold: #b8860b;
+        }
 
-<title>Orders</title>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
+        body {
+            background: var(--cream);
+            font-family: 'DM Sans', sans-serif;
+            color: var(--espresso);
+            min-height: 100vh;
+        }
+
+        /* Top bar */
+        header {
+            background: var(--espresso);
+            padding: 18px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            color: var(--latte);
+            font-size: 1.6rem;
+            letter-spacing: 0.04em;
+        }
+        header span {
+            color: var(--steam);
+            font-size: 0.85rem;
+            opacity: 0.7;
+        }
+
+        .page {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 40px 24px 80px;
+        }
+
+        /* Alert */
+        .alert-error {
+            background: #fdecea;
+            border-left: 4px solid var(--red);
+            color: var(--red);
+            padding: 12px 16px;
+            border-radius: 6px;
+            margin-bottom: 24px;
+            font-size: 0.9rem;
+        }
+
+        /* Section headers */
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--coffee);
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--foam);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-title .icon { font-size: 1.1rem; }
+
+        /* Search bar */
+        .search-bar {
+            background: white;
+            border: 1.5px solid var(--steam);
+            border-radius: 12px;
+            padding: 20px 24px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 32px;
+            box-shadow: 0 2px 12px rgba(44,26,14,0.06);
+        }
+        .search-bar input,
+        .search-bar select {
+            border: 1.5px solid var(--steam);
+            border-radius: 8px;
+            padding: 9px 14px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.9rem;
+            color: var(--espresso);
+            background: var(--cream);
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .search-bar input:focus,
+        .search-bar select:focus { border-color: var(--latte); }
+        .search-bar label { font-size: 0.85rem; color: var(--coffee); font-weight: 500; }
+
+        .btn {
+            padding: 9px 20px;
+            border-radius: 8px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+        .btn-primary {
+            background: var(--espresso);
+            color: var(--latte);
+        }
+        .btn-primary:hover { background: var(--coffee); }
+        .btn-outline {
+            background: transparent;
+            color: var(--coffee);
+            border: 1.5px solid var(--latte);
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-outline:hover { background: var(--foam); }
+        .btn-success {
+            background: var(--green);
+            color: white;
+        }
+        .btn-success:hover { opacity: 0.9; }
+        .btn-gold {
+            background: var(--gold);
+            color: white;
+        }
+        .btn-gold:hover { opacity: 0.9; }
+
+        /* Result count */
+        .result-count {
+            font-size: 0.85rem;
+            color: var(--coffee);
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        /* Order cards */
+        .orders-grid { display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+
+        .order-card {
+            background: white;
+            border: 1.5px solid var(--steam);
+            border-radius: 12px;
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(44,26,14,0.05);
+            transition: box-shadow 0.2s;
+        }
+        .order-card:hover { box-shadow: 0 4px 16px rgba(44,26,14,0.1); }
+        .order-card .order-id {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            color: var(--espresso);
+        }
+        .order-card .order-id span {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.8rem;
+            color: var(--latte);
+            display: block;
+            margin-top: 2px;
+        }
+        .badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 500;
+            letter-spacing: 0.03em;
+        }
+        .badge-pending { background: #fff3cd; color: #856404; }
+        .badge-completed { background: #d1e7dd; color: var(--green); }
+
+        /* Empty state */
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: var(--latte);
+            font-size: 0.95rem;
+            background: white;
+            border-radius: 12px;
+            border: 1.5px dashed var(--steam);
+            margin-bottom: 32px;
+        }
+        .empty-state .empty-icon { font-size: 2rem; margin-bottom: 8px; }
+
+        /* Create order form */
+        .form-card {
+            background: white;
+            border: 1.5px solid var(--steam);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 32px;
+            box-shadow: 0 2px 12px rgba(44,26,14,0.06);
+        }
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: flex-end;
+        }
+        .form-group { display: flex; flex-direction: column; gap: 6px; flex: 1; min-width: 140px; }
+        .form-group label { font-size: 0.82rem; font-weight: 500; color: var(--coffee); }
+        .form-group input {
+            border: 1.5px solid var(--steam);
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.9rem;
+            color: var(--espresso);
+            background: var(--cream);
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .form-group input:focus { border-color: var(--latte); }
+
+        /* Low stock */
+        .low-stock-grid { display: flex; flex-direction: column; gap: 10px; margin-bottom: 12px; }
+        .stock-card {
+            background: white;
+            border: 1.5px solid #fde8e8;
+            border-left: 4px solid var(--red);
+            border-radius: 10px;
+            padding: 14px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .stock-card .item-name { font-weight: 500; font-size: 0.95rem; }
+        .stock-card .stock-info { font-size: 0.82rem; color: var(--coffee); margin-top: 2px; }
+        .stock-pill {
+            background: #fdecea;
+            color: var(--red);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 500;
+        }
+        .healthy-msg {
+            background: #d1e7dd;
+            color: var(--green);
+            padding: 14px 18px;
+            border-radius: 10px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        /* Low stock count badge */
+        .count-badge {
+            background: var(--red);
+            color: white;
+            font-size: 0.75rem;
+            font-family: 'DM Sans', sans-serif;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+
+        /* Divider */
+        .divider { border: none; border-top: 1.5px solid var(--foam); margin: 32px 0; }
+    </style>
 </head>
-
 <body>
 
-<h1>Orders</h1>
-{{#errorMsg}}
-<p style="color:red;">{{errorMsg}}</p>
-{{/errorMsg}}
+<header>
+    <h1>☕ Cafe Management</h1>
+    <span>Orders & Inventory</span>
+</header>
 
-<form action="/orders" method="get">
+<div class="page">
 
-<input type="text" name="search" placeholder="Search by Order ID">
+    {{#errorMsg}}
+        <div class="alert-error">⚠️ {{errorMsg}}</div>
+    {{/errorMsg}}
 
-<select name="status">
-<option value=""> Filtering Type </option>
-<option value="pending">Pending</option>
-<option value="delivered">Delivered</option>
-</select>
+    <!-- Search -->
+    <form action="/orders" method="get" class="search-bar">
+        <input type="text" name="search" placeholder="Search by Order ID">
+        <select name="status">
+            <option value="">All Statuses</option>
+            <option value="pending">Pending</option>
+            <option value="delivered">Delivered</option>
+        </select>
+        <label>From:</label>
+        <input type="date" name="From">
+        <label>To:</label>
+        <input type="date" name="To">
+        <button type="submit" class="btn btn-primary">Search</button>
+        <a href="/orders" class="btn btn-outline">Clear</a>
+    </form>
 
-<label>From:</label>
-<input type="Date" name="From">
+    <p class="result-count">Showing {{resultCount}} order(s)</p>
 
-<label>To:</label>
-<input type="Date" name="To">
+    <!-- Active Orders -->
+    <div class="section-title"><span class="icon">🟡</span> Active Orders</div>
+    {{#hasOrders}}
+        <div class="orders-grid">
+            {{#activeOrders}}
+                <div class="order-card">
+                    <div class="order-id">
+                        Order #{{orderId}}
+                        <span>Active</span>
+                    </div>
+                    <span class="badge badge-pending">{{status}}</span>
+                </div>
+            {{/activeOrders}}
+        </div>
 
-<button type="submit">Search</button>
-<a href="/orders">Clear</a>
+        <!-- Completed Orders -->
+        <div class="section-title"><span class="icon">✅</span> Completed Orders</div>
+        <div class="orders-grid">
+            {{#completedOrders}}
+                <div class="order-card">
+                    <div class="order-id">
+                        Order #{{orderId}}
+                        <span>Completed successfully</span>
+                    </div>
+                    <span class="badge badge-completed">{{status}}</span>
+                </div>
+            {{/completedOrders}}
+        </div>
+    {{/hasOrders}}
 
-</form>
+    {{#noOrders}}
+        <div class="empty-state">
+            <div class="empty-icon">📋</div>
+            No orders found matching your search.
+        </div>
+    {{/noOrders}}
 
-<p>Showing {{resultCount}} orders</p>
+    <hr class="divider">
 
-{{#hasOrders}}
+    <!-- Create Order -->
+    <div class="section-title"><span class="icon">➕</span> Create New Order</div>
+    <div class="form-card">
+        <form action="/saveorder" method="post" class="form-row">
+            <div class="form-group">
+                <label>Items</label>
+                <input type="text" name="items" placeholder="e.g. Latte, Croissant">
+            </div>
+            <div class="form-group">
+                <label>Total Price ($)</label>
+                <input type="number" name="totalPrice" step="0.01" placeholder="0.00" required>
+            </div>
+            <div class="form-group">
+                <label>Message</label>
+                <input type="text" name="orderMessage" placeholder="Optional note">
+            </div>
+            <button type="submit" class="btn btn-success">Create Order</button>
+        </form>
+    </div>
 
-<h2>Active Orders</h2>
-{{#activeOrders}}
+    <hr class="divider">
 
+    <!-- Low Stock Alerts -->
+    <div class="section-title">
+        <span class="icon">⚠️</span> Low Stock Alerts
+        {{#hasLowStock}}<span class="count-badge">{{lowStockCount}}</span>{{/hasLowStock}}
+    </div>
 
-<p>
-Order ID: {{orderId}} <br>
-Order Status: {{status}} <br>
-</p>
+    {{#hasLowStock}}
+        <div class="low-stock-grid">
+            {{#lowStockItems}}
+                <div class="stock-card">
+                    <div>
+                        <div class="item-name">{{name}}</div>
+                        <div class="stock-info">Threshold: {{threshold}} units</div>
+                    </div>
+                    <span class="stock-pill">{{quantity}} left</span>
+                </div>
+            {{/lowStockItems}}
+        </div>
+    {{/hasLowStock}}
 
+    {{#noLowStock}}
+        <div class="healthy-msg">✅ All stock levels are healthy</div>
+    {{/noLowStock}}
 
-<hr>
-{{/activeOrders}}
+    <!-- Update Inventory -->
+    <div class="section-title" style="margin-top:24px;"><span class="icon">📦</span> Update Inventory</div>
+    <div class="form-card">
+        <form action="/inventory/update" method="post" class="form-row">
+            <div class="form-group">
+                <label>Item Name</label>
+                <input type="text" name="name" placeholder="e.g. Milk" required>
+            </div>
+            <div class="form-group">
+                <label>Quantity</label>
+                <input type="number" name="quantity" placeholder="0" required>
+            </div>
+            <div class="form-group">
+                <label>Threshold</label>
+                <input type="number" name="threshold" placeholder="0" required>
+            </div>
+            <button type="submit" class="btn btn-gold">Add / Update Item</button>
+        </form>
+    </div>
 
-<h2>Completed Orders</h2>
-{{#completedOrders}}
-<p>
-<strong>Order completed successfully</strong><br>
-
-Order ID: {{orderId}} <br>
-Order Status: {{status}}
-
-</p>
-
-<hr>
-{{/completedOrders}}
-
-{{/hasOrders}}
-
-{{#noOrders}}
-
-<p>
-
-No orders found matching your search.
-
-</p>
-
-{{/noOrders}}
-
-
-<form action="/saveorder" method="post">
-
-<label>Items</label>
-<input type="text" name="items">
-
-<label>Total Price</label>
-    <input type="number" name="totalPrice" step="0.01" required>
-    <label>Message</label>
-    <input type="text" name="orderMessage">
-
-<button type="submit">Create Order</button>
-
-</form>
-
-<h2>Low Stock Alerts</h2>
-
-{{#hasLowStock}}
-<p> Low Stock Items ({{lowStockCount}})</p>
-
-{{#lowStockItems}}
-<p>
-Item: {{name}} <br>
-Quantity: {{quantity}} <br>
-Threshold: {{threshold}}
-</p>
-<hr>
-{{/lowStockItems}}
-{{/hasLowStock}}
-
-{{#noLowStock}}
-<p style="color:green;">All stock levels are healthy</p>
-{{/noLowStock}}
-
+</div>
 </body>
 </html>
