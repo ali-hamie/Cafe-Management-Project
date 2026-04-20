@@ -24,21 +24,12 @@ public class LoginController {
 
     @PostMapping("/login")
     public String login(@RequestParam String email, @RequestParam String password, Model model) {
-
-        User user = userService.findByUserByEmail(email);
-
-        if (user == null) {
+        if (userService.authenticate(email, password)) {
+            return "redirect:/dashboard"; // Redirection propre
+        } else {
             model.addAttribute("errorMsg", "Email or password incorrect");
             return "login";
         }
 
-        // comparaison
-        if (password.equals(user.getPassword())) {
-            return "dashboard";
-        } else {
-            model.addAttribute("errorMsg", "email or password incorrect");
-            return "login";
-        }
     }
-
 }

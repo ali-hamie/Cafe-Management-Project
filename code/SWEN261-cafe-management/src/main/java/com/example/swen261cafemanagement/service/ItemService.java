@@ -15,18 +15,11 @@ public class ItemService {
         return new ArrayList<>(items.values());
     }
 
-    public void addItem(Items item) {
+    public void addItem(String name, double price, int quantity) {
+//        Items item = new Items(name, (int) price, quantity);
 //        item.setId(idCounter++);
 //        items.put(item.getId(), item);
     }
-
-//    public Items updateItem(Long id, Items updatedItem) {
-//        if (!items.containsKey(id)) return null;
-//
-//        updatedItem.setId(id);
-//        items.put(id, updatedItem);
-//        return updatedItem;
-//    }
 
     public void deleteItem(Long id) {
         items.remove(id);

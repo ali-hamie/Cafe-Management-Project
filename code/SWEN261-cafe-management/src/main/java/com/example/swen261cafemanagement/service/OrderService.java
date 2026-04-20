@@ -19,7 +19,16 @@ public class OrderService {
     public ArrayList<Order> getAllOrders() {
         return orders;
     }
+    public boolean processNewOrder(Order order) {
+        if (order.getItems() == null || order.getItems().isEmpty()) {
+            return false;
+        }
 
+        order.setOrderId(String.valueOf(System.currentTimeMillis()));
+        order.setStatus("pending");
+        orders.add(order);
+        return true;
+    }
     // FIXED: missing List import issue resolved
     public ArrayList<Order> getActiveOrders(List<Order> orderList) {
         ArrayList<Order> active = new ArrayList<>();

@@ -26,11 +26,21 @@ public class UserService {
             }
             return null;
         }
+
+        public boolean authenticate(String email, String password) {
+            User user = findByUserByEmail(email);
+            if (user == null) {
+                return false;
+            }
+            return password.equals(user.getPassword());
+        }
+
         public UserService() {
            User test_user = new User("test user","test@gmail.com", "testpassword");
            User test2 = new User("test user2","test@test.com", "password");
            createUser(test_user);
            createUser(test2);
         }
+
 
 }
