@@ -2,9 +2,87 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Logout Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logged Out — Cafe Management</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #faf6f1;
+            --espresso: #2c1a0e;
+            --coffee: #6b3f1f;
+            --latte: #c9a882;
+            --steam: #e8ddd0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--cream);
+            font-family: 'DM Sans', sans-serif;
+            color: var(--espresso);
+
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logout-container {
+            background: white;
+            border: 1.5px solid var(--steam);
+            border-radius: 12px;
+            padding: 50px 40px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(44,26,14,0.08);
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--coffee);
+            margin-bottom: 12px;
+        }
+
+        p {
+            color: var(--latte);
+            font-size: 0.95rem;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--espresso);
+            color: var(--cream);
+            text-decoration: none;
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .btn:hover {
+            background: var(--coffee);
+            transform: translateY(-2px);
+        }
+    </style>
 </head>
 <body>
- You have been logged out
+
+<div class="logout-container">
+    <div class="icon">👋</div>
+    <h1>See you soon!</h1>
+    <p>You have successfully logged out of the Cafe Management Admin Dashboard.</p>
+    <a href="/login" class="btn">Return to Login</a>
+</div>
+
 </body>
 </html>
