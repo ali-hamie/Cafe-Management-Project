@@ -1,0 +1,195 @@
+@startuml
+
+' Models
+
+class Order {
+  - orderId : String
+  - orderMessage : String
+  - items : String
+  - status : String
+  - totalPrice : double
+  - createdAt : LocalDate
+  --
+  + getOrderId() : String
+  + getStatus() : String
+  + setStatus() : void
+  + getItems() : String
+  + setItems() : void
+  + getTotalPrice() : double
+  + isPending() : boolean
+  + isCompleted() : boolean
+}
+
+class Items {
+  - name : String
+  - quantity : int
+  - threshold : int
+  --
+  + getName() : String
+  + getQuantity() : int
+  + setQuantity() : void
+  + isLowStock() : boolean
+}
+
+class User {
+  - name : String
+  - email : String
+  - password : String
+  - selectedPlanId : Integer
+  --
+  + getName() : String
+  + getEmail() : String
+  + getPassword() : String
+  + getSelectedPlanId() : Integer
+  + setSelectedPlanId() : void
+}
+
+class PricingPlan {
+  - id : int
+  - name : String
+  - description : String
+  - price : double
+  - features : List
+  - recommended : boolean
+  --
+  + getID() : int
+  + getName() : String
+  + getPrice() : double
+  + getFeatures() : List
+  + isRecommended() : boolean
+}
+
+' Services
+
+class OrderService {
+  - orders : ArrayList
+  --
+  + createOrder() : void
+  + getAllOrders() : ArrayList
+  + processNewOrder() : boolean
+  + getActiveOrders() : ArrayList
+  + getCompletedOrders() : ArrayList
+  + getFilteredOrders() : ArrayList
+  + searchByOrderId() : ArrayList
+  + filterByStatus() : ArrayList
+  + updateOrderStatus() : boolean
+  + findById() : Order
+  + cancelOrder() : boolean
+}
+
+class InventoryService {
+  - items : ArrayList
+  --
+  + getAllItems() : ArrayList
+  + getLowStockItems() : ArrayList
+  + addOrUpdateItem() : void
+}
+
+class ItemService {
+  - items : Map
+  --
+  + getAllItems() : List
+  + addItem() : void
+  + deleteItem() : void
+  + getItem() : Items
+}
+
+class UserService {
+  - users : ArrayList
+  --
+  + createUser() : void
+  + getAllUsers() : ArrayList
+  + findByUserByEmail() : User
+  + authenticate() : boolean
+}
+
+class PricingService {
+  - pricingPlans : ArrayList
+  --
+  + getPricingPlans() : ArrayList
+  + findPlanById() : PricingPlan
+  + selectPlanForUser() : boolean
+}
+
+' Controllers
+
+class OrderController {
+  - orderService : OrderService
+  - inventoryService : InventoryService
+  --
+  + orders() : String
+  + saveOrder() : String
+  + updateStatus() : String
+  + cancelOrder() : String
+  + updateInventory() : String
+}
+
+class LoginController {
+  - userService : UserService
+  --
+  + getLogin() : String
+  + login() : String
+}
+
+class LogoutController {
+  --
+  + getLogout() : String
+}
+
+class MainController {
+  --
+  + getWelcome() : String
+  + getDashboard() : String
+}
+
+class PricingController {
+  - pricingService : PricingService
+  --
+  + getPricingPage() : String
+}
+
+class PricingAPI {
+  - pricingService : PricingService
+  - userService : UserService
+  --
+  + getPricingPlans() : List
+  + getPlanById() : ResponseEntity
+  + selectPlan() : ResponseEntity
+}
+
+class ItemController {
+  - itemService : ItemService
+  --
+  + viewItems() : String
+  + addItem() : String
+  + deleteItem() : String
+}
+
+class ProductAPI {
+  - orderService : OrderService
+  --
+  + getProduct() : Order
+  + getOrders() : ResponseEntity
+}
+
+' Services use Models
+
+OrderService ..> Order
+InventoryService ..> Items
+ItemService ..> Items
+UserService ..> User
+PricingService ..> PricingPlan
+PricingService ..> User
+
+' Controllers use Services
+
+OrderController ..> OrderService
+OrderController ..> InventoryService
+LoginController ..> UserService
+PricingController ..> PricingService
+PricingAPI ..> PricingService
+PricingAPI ..> UserService
+ItemController ..> ItemService
+ProductAPI ..> OrderService
+
+@enduml
