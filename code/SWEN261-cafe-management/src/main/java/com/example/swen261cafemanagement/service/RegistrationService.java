@@ -22,7 +22,7 @@ public class RegistrationService {
             return sb.toString();
         } catch (Exception e) { return pass; }
     }
-    public String validateAndRegister(String name, String email, String phone, String pass, String confirm) {
+    public String validateAndRegister(String name, String email, String pass, String confirm) {
         if (!Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE).matcher(email).find()) {
             return "Email format is invalid.";
         }
@@ -35,7 +35,7 @@ public class RegistrationService {
 
         String hashed = hash(pass);
 
-        User newUser = new User(name, email, hashed);
+        User newUser = new User(name, email, hashed, "STAFF");
         userService.createUser(newUser);
 
         return null;

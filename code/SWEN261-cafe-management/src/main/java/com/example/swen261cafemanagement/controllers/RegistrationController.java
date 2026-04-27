@@ -21,10 +21,10 @@ public class RegistrationController {
     public String showPage() { return "register"; }
 
     @PostMapping("/register")
-    public String handleRegister(@RequestParam String name, @RequestParam String email, @RequestParam String phone,
+    public String handleRegister(@RequestParam String name, @RequestParam String email,
                                  @RequestParam String password, @RequestParam String confirmPassword, Model model) {
 
-        String error = registrationService.validateAndRegister(name, email, phone, password, confirmPassword);
+        String error = registrationService.validateAndRegister(name, email, password, confirmPassword);
 
         if (error != null) {
             model.addAttribute("errorMsg", error);

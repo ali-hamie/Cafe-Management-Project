@@ -46,8 +46,8 @@ public class UserService {
         }
 
         public UserService() {
-           User test_user = new User("test user","test@gmail.com", hash("testpassword"));
-           User test2 = new User("test user2","test@test.com", hash("password"));
+           User test_user = new User("test user","test@gmail.com", hash("testpassword"),"STAFF");
+           User test2 = new User("test user2","test@test.com", hash("password"),"STAFF");
            createUser(test_user);
            createUser(test2);
 
