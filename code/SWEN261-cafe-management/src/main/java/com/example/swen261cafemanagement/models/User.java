@@ -4,12 +4,14 @@ public class User {
     public String name;
     public String email;
     public String password;
+    public String role;
     private Integer selectedPlanId;
 
-    public User(String name, String email, String password_hashed) {
+    public User(String name, String email, String password_hashed, String role) {
         this.name = name;
         this.email = email;
         this.password = password_hashed;
+        this.role = role;
         this.selectedPlanId = null;
     }
 
@@ -43,5 +45,13 @@ public class User {
 
     public void setSelectedPlanId(Integer selectedPlanId) {
         this.selectedPlanId = selectedPlanId;
+    }
+
+    public String getRole() {
+        return role; 
+    }
+
+    public void setRole(String role) {
+        this.role = role; 
     }
 }
