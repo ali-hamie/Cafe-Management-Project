@@ -133,6 +133,19 @@
     <p class="welcome">Welcome back 👋</p>
     <p class="welcome-sub">What would you like to manage today?</p>
 
+    {{#errorMsg}}
+    <div style="
+        background-color: #fdf0ec;
+        border-left: 4px solid #e74c3c;
+        padding: 12px;
+        margin-bottom: 20px;
+        color: #c0392b;
+        border-radius: 6px;
+    ">
+        ⚠ {{errorMsg}}
+    </div>
+    {{/errorMsg}}
+
     <div class="grid">
 
         <a href="/orders" class="card">
