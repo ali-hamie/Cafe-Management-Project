@@ -16,9 +16,9 @@ public class ItemService {
     }
 
     public void addItem(String name, double price, int quantity) {
-//        Items item = new Items(name, (int) price, quantity);
-//        item.setId(idCounter++);
-//        items.put(item.getId(), item);
+       Items item = new Items(name, (int) price, quantity);
+       item.setId(idCounter++);
+       items.put(item.getId(), item);
     }
 
     public void deleteItem(Long id) {
