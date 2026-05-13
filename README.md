@@ -1,151 +1,90 @@
-# SWEN-261-Cafe-Management
+# Cafe Management System
 
-Cafe management project for SWEN 261 - Group 5
+A Java Spring Boot cafe management system developed as a team project for the SWEN 261 Software Engineering course at Rochester Institute of Technology - Dubai.
 
-# Team Members
+The system supports cafe operations such as order creation, order viewing, order status tracking, order cancellation, pricing package management, inventory item management, low stock alerts, and role-based access control.
 
-Meera Yousuf Alshara - 409004936
+## Project Overview
 
-Syed Iftesam Hossain - 757000052
+This project was designed for small cafe businesses that need a simple and cost-effective way to manage daily operations. The system helps organize customer orders, pricing packages, inventory workflows, and staff access through a web-based interface.
 
-Mouza Alameri - 776006459
+The project followed a Scrum-based development process, with user stories divided across team members and implemented through feature branches and pull requests.
 
-Francois Motte - 406007344
+## My Contributions
 
-Ali Hamie - 757001996
+As part of the development team, my main contributions included:
 
+- Implemented **US-004: Viewing Pricing Packages**
+- Implemented **US-008: Order Cancellation Before Preparation**
+- Developed backend model and service logic for assigned features
+- Built frontend pages using Mustache templates
+- Connected frontend workflows with Spring Boot backend logic
+- Helped with testing, debugging, and feature integration
+- Contributed to documentation for assigned user stories
 
-# Product Vision
+## Features
 
-To upcoming entrepreneurs in the coffeeshop industry who require a cost-effective and effective means of running daily operations, our product is a cafe management system, which centralizes order tracking, inventory control, delivery management, and services to be offered. It further assists in decreasing operational complexity with the easy, convenient interface and equal commision system. Our solution is affordable, easy to use, and offers flexibility to new entrepreneurs unlike more complex or expensive enterprise systems; it includes the saved operational documentation, flexible pricing and three months of maintanance support based on their budget and stage of growth 
-
-# Project Overview 
-
-This project is being developed as a part of the SWEN 261 course at RIT Dubai, instructed by Professor Ali Assi.
-The system allows for different types of users to interact with a cafe catalog, manage items, and process collections using a modern architecture
-
-# Technology Stack
-
-Backend: Java Spring Boot
-
-Frontend: Mustache (HTML templates)
-
-Database: None (ArrayList in-memory storage)
-
-Project Management: Scrum with [Trello](https://trello.com/invite/b/696f297c36e70018d3f233b2/ATTI19dfb0717a7b2a0b1992adfc04f799e111786B2D/swen-261-cafe-management)
-
-These can be found either through their links or through the Documentation Folder:
-
-  [Functional Requirements Document](https://docs.google.com/document/d/1eMc52Au5xIlwfVMOMQQlgS9R2C_tn3YSlAWE2lU5fKE/edit?tab=t.0#heading=h.zdvtvb4foy3e)
-
-  [Tracebility Matrix Spreadsheet](https://docs.google.com/spreadsheets/d/1XThwFhMMYKYLKBlE7lp5Z0-wSb4M6e3bc1sb83COF7k/edit?gid=0#gid=0)
-
-  [Glossary of terms](https://docs.google.com/spreadsheets/d/1eluYVYd1kAN4puDzniHQ9QWfnva_sZ4aHyV88grYhw8/edit?gid=0#gid=0)
-
-  [UML](https://lucid.app/lucidchart/55085f5a-c088-4a4d-9449-aad70fc40195/edit?invitationId=inv_d6bde052-db9e-4956-a122-efc43a3172a9)
-
-# Sprint Plan (10 Days)
-
-Days 1–2: Setup + task breakdown
-
-Days 3–5: Backend development
-
-Days 6–8: Frontend development
-
-Days 9–10: Testing + integration + documentation
-
-# Implemented User Stories (Assignment 2)
-
-For Assignment 2, the following user stories were selected and distributed among the team:
-
-US-001: Creation of Order
-
-US-002: Viewing Orders
-
-US-004: Viewing Pricing Packages
-
-US-006: User Login and Session (Optional)
-
-US-009: Order Search and Filter
-
-# Work Distribution (Assignmnet 2)
-
-Each team member contributed to both backend and frontend tasks as required:
-
-Meera:
-US-001 (Creation of Order) – Implemented backend (Order model, service, POST endpoint) and frontend (order creation form and integration)
-
-Syed:
-US-009 (Order Search and Filter) – Implemented backend (search and filter methods, endpoints) and frontend (search and filter interface)
-
-Mouza:
-US-002 (Viewing Orders) – Implemented backend (order retrieval logic) and frontend (display of active and completed orders)
-
-Francois:
-US-006 (User Login and Session – Optional) – Implemented backend (login logic) and frontend (login interface), and assisted in testing
-
-Ali:
-US-004 (Viewing Pricing Packages) – Implemented backend (pricing model and service) and frontend (pricing display page)
-
-------------------------------------------------------------------------------------------------------------------------
-#Work Distribution (Assignment 3)
-
-US-003: Tracking Order Status (Meera)
-
-US-012: Low Stock Alerts (Meera)
-
-US-005: Selecting Pricing Packages (Syed)
-
-US-007: Role Based Access Control (Francois)
-
-US-008: Order Cancellation Before Preparation (Ali)
-
-US-011: Inventory Item Management (Mouza)
-
-------------------------------------------------------------------------------------------------------------------------------------------
-Meera:
-
-US-003 (Tracking Order Status) - Implemented frontend and backend
-US-012 (Low Stock Alerts) - Implemented frontend and backend
-
-Syed:
-US-005 (Selecting Pricing Packages) - Implemented frontend and backend
-
-Francois:
-US-007 (Role Based Access Control) - Implemented frontend and backend
-
-Ali:
-US-008 (Order Cancellation Before Preparation) - Implemented frontend and backend
-
-Mouza:
-US-011 (Inventory Item Management) - Implemented frontend and backend
-
-# Implementation Details
-
-Data is stored using ArrayList (in-memory storage) as required by the assignment
-
-No database is used & data resets when the application restarts
-
-Backend is implemented using Spring Boot with REST endpoints
-
-Frontend is implemented using Mustache templates
-
-Full integration between frontend and backend is achieved
-
-# Key Features 
-#Assignment 2
-- Create and store new orders using a form
-- Display active and completed orders
+- Create and manage customer orders
+- View active and completed orders
 - Search and filter orders
-- View pricing packages
-- Basic login functionality (optional)
-  
-------------------------------------------------------------------
-- #Assignment 3
-- Full CRUD (Create, Read, Update, Delete) for all entities
-- Simulated entity relationships using in-memory ArrayList storage
-- REST API returning JSON responses
-- Low stock alert system with dynamic inventory updates
-- Order status tracking and cancellation
-- Role-based access control (admin/staff)
-- Feature branch Git workflow with pull requests
+- View and select pricing packages
+- Track order status
+- Cancel orders before preparation
+- Manage inventory items
+- Display low stock alerts
+- Apply role-based access control for admin and staff users
+- Use REST endpoints to return JSON responses
+
+## Technology Stack
+
+- **Backend:** Java, Spring Boot
+- **Frontend:** Mustache, HTML, CSS
+- **Storage:** In-memory ArrayList storage
+- **Architecture:** MVC-based structure
+- **Project Management:** Scrum, sprint planning, user stories
+- **Version Control:** Git and GitHub
+
+## Implementation Details
+
+- Data is stored using in-memory ArrayLists as required by the assignment.
+- No external database is used, so data resets when the application restarts.
+- Backend functionality is implemented using Spring Boot services and controllers.
+- Frontend pages are implemented using Mustache templates.
+- Features were developed using a feature branch workflow and pull requests.
+- The project includes both frontend and backend integration for the main user stories.
+
+## User Stories Implemented
+
+### Assignment 2
+
+- **US-001:** Creation of Order
+- **US-002:** Viewing Orders
+- **US-004:** Viewing Pricing Packages
+- **US-006:** User Login and Session
+- **US-009:** Order Search and Filter
+
+### Assignment 3
+
+- **US-003:** Tracking Order Status
+- **US-005:** Selecting Pricing Packages
+- **US-007:** Role-Based Access Control
+- **US-008:** Order Cancellation Before Preparation
+- **US-011:** Inventory Item Management
+- **US-012:** Low Stock Alerts
+
+## Team Project Notice
+
+This project was completed as a group assignment. The repository includes contributions from multiple team members. My individual contributions focused mainly on pricing package viewing, order cancellation before preparation, backend logic, frontend integration, testing, and documentation.
+
+## What I Learned
+
+Through this project, I gained practical experience in:
+
+- Building Java Spring Boot applications
+- Working with MVC architecture
+- Creating backend services and controllers
+- Connecting frontend templates with backend logic
+- Writing and managing user stories
+- Using GitHub feature branches and pull requests
+- Collaborating in a software development team
+- Testing and debugging web application features
